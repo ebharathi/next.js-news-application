@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Lato } from "next/font/google";
+import Link from "next/link";
 export interface NavbarProps{
 
 }
@@ -22,11 +23,11 @@ const Navbar:FC<NavbarProps>=()=>{
                       <span className="hidden md:block px-2">Sign in</span>
              </div>
              <div className="hidden md:grid col-span-6 md:col-span-3 grid-cols-7">
-                        <li className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">News</li>
-                        <li className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-r-[#737a75]">Sport</li>
-                        <li className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-r-[#737a75]">Business</li>
-                        <li className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-r-[#737a75]">Travel</li>
-                        <li className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-r-[#737a75]">Science</li>
+                        <Link href="/category/sports" className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">Sports</Link>
+                        <Link href="/category/business" className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">Business</Link>
+                        <Link href="/category/science" className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">Science</Link>
+                        <Link href="/category/health" className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">Health</Link>
+                        <Link href="/category/technology" className="cursor-pointer hover:bg-[#737a75] text-center pt-4 border-r-2 border-l-2 border-l-[#737a75] border-r-[#737a75]">Technology</Link>
                         <li className="cursor-pointer hover:bg-[#737a75] col-span-2 pt-4 border-r-2 border-r-[#737a75]">
                             <span className="text-left pl-3">More</span>
                             <ArrowDropDownIcon className="float-right mr-3"/>

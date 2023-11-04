@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const [headlines,setHeadlines]=useState([])
+    const [loader,setLoader]=useState(true);
     useEffect(()=>{
         const getHeadline=async()=>{
             await axios.post('/api/headline')
@@ -17,6 +18,7 @@ export default function Home() {
                 {
                   if(resp.data?.status=="ok")
                     setHeadlines(resp.data.articles)
+                    setLoader(false);
                 }
              })
         }
@@ -26,11 +28,18 @@ export default function Home() {
   return (
     <main>
          <Navbar></Navbar>
+         {
+          loader?
+        <div className="flex justify-center mt-40 text-[30px]">
+            <span>FETCHING NEWS...</span>
+        </div>
+          :
          <div className='md:mx-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-10'>
             {
               headlines.map((s:any)=>s?.urlToImage!=null&&<News className='border-2 border-[#c7c9c8] rounded-lg cursor-pointer hover:shadow-2xl hover:bg-[#c7c9c8] px-3 py-2' publishedDate={s?.publishedAt} image={s?.urlToImage} title={s?.title} desc={s?.description} source={s?.source?.name} author={s?.author}/>)
             }
          </div>
+         }
     </main>
   )
 }
