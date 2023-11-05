@@ -5,13 +5,13 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Lato } from "next/font/google";
 import Link from "next/link";
 export interface NavbarProps{
-
+   setSearch?:any;
 }
 const lato=Lato({
     subsets: ['latin'],
     weight:'700'
 })
-const Navbar:FC<NavbarProps>=()=>{
+const Navbar:FC<NavbarProps>=({setSearch})=>{
   
     return (
         <nav className={`bg-black grid grid-cols-6 text-white md:mx-40 ${lato.className}`}>
@@ -34,7 +34,7 @@ const Navbar:FC<NavbarProps>=()=>{
                         </li>
              </div>
              <div className="hidden md:block col-span-6 md:col-span-1 text-left px-2 pt-3">
-                <input className="px-1 py-1 outline-none text-black" placeholder="Search"/>
+                <input className="px-1 py-1 outline-none text-black" placeholder="Search" onChange={(e)=>setSearch(e.target.value)}/>
                 <span  className="bg-white text-black px-1 py-1.5"><SearchIcon/></span>
              </div>
         </nav>

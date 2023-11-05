@@ -6,6 +6,8 @@ import axios from 'axios';
 const Category=()=>{
     const router=useRouter();
     const [data,setData]=useState([]);
+    const [original,setOriginal]=useState([])
+    const [search,setSearch]=useState("")
     const [loader,setLoader]=useState(true);
     useEffect(()=>{
         console.log("Useffect calling[+]")
@@ -19,6 +21,7 @@ const Category=()=>{
               {
                   console.log("inside")
                   setData(response?.data?.articles)
+                  setOriginal(response?.data?.articles)
                   setLoader(false);
               }
             }) 
@@ -27,9 +30,20 @@ const Category=()=>{
         }
         getData();
     },[router?.query?.category])
+    useEffect(()=>{
+        console.log("--->",search)
+        if(search!="")
+         {
+          let arr=data.filter((s:any)=>s?.title.toLowerCase().includes(search.toLowerCase()))
+          console.log("filtered--?",arr)
+          setData(arr);
+         }
+         else 
+          setData(original);
+      },[search])
     return(
         <main>
-             <Navbar/>
+             <Navbar setSearch={setSearch}/>
              {
                 loader?
             <div className="flex justify-center mt-40 text-[30px]">

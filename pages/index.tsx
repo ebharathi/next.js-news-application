@@ -8,7 +8,9 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const [headlines,setHeadlines]=useState([])
+    const [data,setData]=useState([])
     const [loader,setLoader]=useState(true);
+    const [search,setSearch]=useState("");
     useEffect(()=>{
         const getHeadline=async()=>{
             await axios.post('/api/headline')
@@ -17,17 +19,29 @@ export default function Home() {
                 if(resp.data)
                 {
                   if(resp.data?.status=="ok")
-                    setHeadlines(resp.data.articles)
-                    setLoader(false);
+                  setHeadlines(resp.data.articles)
+                  setData(resp.data.articles)
+                  setLoader(false);
                 }
              })
         }
         if(headlines.length==0)
           getHeadline()
     },[])
+    useEffect(()=>{
+      console.log("--->",search)
+      if(search!="")
+       {
+        let arr=headlines.filter((s:any)=>s?.title.toLowerCase().includes(search.toLowerCase()))
+        console.log("filtered--?",arr)
+        setHeadlines(arr);
+       }
+       else 
+        setHeadlines(data);
+    },[search])
   return (
     <main>
-         <Navbar></Navbar>
+         <Navbar setSearch={setSearch}></Navbar>
          {
           loader?
         <div className="flex justify-center mt-40 text-[30px]">
